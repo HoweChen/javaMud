@@ -12,6 +12,7 @@
         <module>mud-spring-aop</module>
         <module>mud-springboot</module>
         <module>mud-java-basic</module>
+        <module>mud-shiro</module>
     </modules>
 
     <repositories>
@@ -34,13 +35,17 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <shiro.version>1.7.1</shiro.version>
+        <hutool.verion>5.7.2</hutool.verion>
+        <apache.common.lang3.version>3.12.0</apache.common.lang3.version>
+        <guava.version>30.1.1-jre</guava.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.7.2</version>
+            <version>${hutool.verion}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -52,7 +57,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>${apache.common.lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
     </dependencies>

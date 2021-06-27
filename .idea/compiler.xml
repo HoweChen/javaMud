@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="mud-spring-aop" />
         <module name="mud-springboot" />
+        <module name="mud-shiro" />
         <module name="mud-java-basic" />
       </profile>
     </annotationProcessing>
