@@ -9,5 +9,4 @@ public class MudSpringbootApplication {
   public static void main(String[] args) {
     SpringApplication.run(MudSpringbootApplication.class, args);
   }
-
 }

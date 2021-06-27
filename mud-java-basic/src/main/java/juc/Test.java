@@ -1,7 +1,6 @@
 package juc;
 
 public enum Test {
-
   PUBLIC(String.class),
   PRIVATE(Integer.class);
 
@@ -11,12 +10,12 @@ public enum Test {
     this.clazz = stringClass;
   }
 
-  public Class<?> getClazz() {
-    return clazz;
-  }
-
   public static void main(String[] args) {
     System.out.println(Test.PUBLIC.getClazz());
     System.out.println(Test.PRIVATE.getClazz());
+  }
+
+  public Class<?> getClazz() {
+    return clazz;
   }
 }

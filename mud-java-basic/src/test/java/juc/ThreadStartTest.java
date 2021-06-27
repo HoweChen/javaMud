@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 public class ThreadStartTest {
 
   @Test
-  public void givenOneThread_whenStart_thenShouldSucceed(){
+  public void givenOneThread_whenStart_thenShouldSucceed() {
     final Thread t = new Thread(() -> System.out.println("Started"));
     t.start();
   }
 
   @Test
-  public void givenOneDefaultThread_whenGetThreadGroup_thenShouldBeTheSame(){
+  public void givenOneDefaultThread_whenGetThreadGroup_thenShouldBeTheSame() {
     // given
     final Thread t1 = new Thread(() -> System.out.println("Started"));
     final ThreadGroup currentThreadGroup = Thread.currentThread().getThreadGroup();
@@ -24,7 +24,7 @@ public class ThreadStartTest {
   }
 
   @Test
-  public void givenOneThreadWithThreadGroup_whenGetThreadGroup_thenShouldNotBeTheSame(){
+  public void givenOneThreadWithThreadGroup_whenGetThreadGroup_thenShouldNotBeTheSame() {
     // given
     final Thread t2 = new Thread(new ThreadGroup("Haha"), () -> System.out.println("Fuck"));
     final ThreadGroup currentThreadGroup = Thread.currentThread().getThreadGroup();
@@ -34,5 +34,4 @@ public class ThreadStartTest {
     // then
     Assertions.assertNotEquals(currentThreadGroup, t2ThreadGroup);
   }
-
 }

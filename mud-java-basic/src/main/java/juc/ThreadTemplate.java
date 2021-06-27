@@ -1,18 +1,13 @@
 package juc;
 
-/**
- * @author howechen
- */
+/** @author howechen */
 public class ThreadTemplate {
 
-  public final void print(){
+  public final void print() {
     System.out.println("#########");
     printInfo();
     System.out.println("#########");
   }
 
-  protected void printInfo() {
-
-  }
-
+  protected void printInfo() {}
 }
