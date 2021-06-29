@@ -9,7 +9,7 @@
         <version>2.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.howechen</groupId>
+    <groupId>com.howechen.javaMud.springboot</groupId>
     <artifactId>mud-springboot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mud-springboot</name>

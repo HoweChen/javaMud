@@ -9,6 +9,7 @@
         <module name="mud-spring-aop" />
         <module name="mud-springboot" />
         <module name="mud-shiro" />
+        <module name="mud-camel" />
         <module name="mud-java-basic" />
       </profile>
     </annotationProcessing>
