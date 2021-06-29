@@ -31,15 +31,21 @@
             <!-- 是否开启快照版构件下载 -->
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
     </repositories>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <shiro.version>1.7.1</shiro.version>
         <hutool.verion>5.7.2</hutool.verion>
         <apache.common.lang3.version>3.12.0</apache.common.lang3.version>
         <guava.version>30.1.1-jre</guava.version>
+        <junit.version>5.7.2</junit.version>
+        <jmh.version>1.32</jmh.version>
     </properties>
 
     <dependencyManagement>
@@ -52,7 +58,7 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>RELEASE</version>
+                <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -66,7 +72,11 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-core</artifactId>
+                <version>${jmh.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
