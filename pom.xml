@@ -46,6 +46,7 @@
         <guava.version>30.1.1-jre</guava.version>
         <junit.version>5.7.2</junit.version>
         <jmh.version>1.32</jmh.version>
+        <log4j2.version>2.14.1</log4j2.version>
     </properties>
 
     <dependencyManagement>
@@ -76,6 +77,13 @@
                 <groupId>org.openjdk.jmh</groupId>
                 <artifactId>jmh-core</artifactId>
                 <version>${jmh.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
+                <scope>runtime</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
