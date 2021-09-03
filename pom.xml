@@ -48,6 +48,7 @@
         <junit.version>5.7.2</junit.version>
         <jmh.version>1.32</jmh.version>
         <log4j2.version>2.14.1</log4j2.version>
+        <dagger2.version>2.x</dagger2.version>
     </properties>
 
     <dependencyManagement>
@@ -86,7 +87,32 @@
                 <version>${log4j2.version}</version>
                 <scope>runtime</scope>
             </dependency>
+            <dependency>
+                <groupId>com.google.dagger</groupId>
+                <artifactId>dagger</artifactId>
+                <version>${dagger2.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.google.dagger</groupId>
+                            <artifactId>dagger-compiler</artifactId>
+                            <version>2.x</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
