@@ -42,7 +42,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <hutool.verion>5.7.11</hutool.verion>
+        <hutool.verion>5.7.15</hutool.verion>
         <apache.common.lang3.version>3.12.0</apache.common.lang3.version>
         <guava.version>30.1.1-jre</guava.version>
         <junit.version>5.7.2</junit.version>
