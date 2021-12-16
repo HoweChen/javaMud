@@ -8,6 +8,12 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <parent>
+        <artifactId>javaMud</artifactId>
+        <groupId>com.howechen.javaMud</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <name>com.howechen.javaMud mud-kotlin</name>
 
     <properties>

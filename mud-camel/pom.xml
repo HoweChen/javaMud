@@ -13,7 +13,6 @@
     <artifactId>mud-camel</artifactId>
     <packaging>jar</packaging>
 
-<!--    <name>A Camel Route</name>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

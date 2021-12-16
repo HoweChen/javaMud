@@ -9,6 +9,8 @@
     <groupId>com.howechen.javaMud.mudQuartz</groupId>
     <artifactId>mud-quartz</artifactId>
 
+    <packaging>pom</packaging>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>

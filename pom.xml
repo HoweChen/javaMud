@@ -9,12 +9,12 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>mud-spring-aop</module>
-        <module>mud-springboot</module>
         <module>mud-java-basic</module>
         <module>mud-shiro</module>
         <module>mud-camel</module>
         <module>mud-quartz</module>
+        <module>mud-kotlin</module>
+        <module>mud-spring</module>
     </modules>
 
     <repositories>
