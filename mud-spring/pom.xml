@@ -22,6 +22,7 @@
     <modules>
         <module>mud-spring-boot</module>
         <module>mud-spring-aop</module>
+        <module>mud-spring-boot-interceptor</module>
     </modules>
 
     <dependencyManagement>
