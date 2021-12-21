@@ -23,6 +23,8 @@
         <module>mud-spring-boot</module>
         <module>mud-spring-aop</module>
         <module>mud-spring-boot-interceptor</module>
+        <module>mud-spring-boot-sentinel</module>
+        <module>mud-spring-data-jpa</module>
     </modules>
 
     <dependencyManagement>
@@ -59,6 +61,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring.boot.versoin}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${spring.boot.versoin}</version>
             </dependency>
         </dependencies>
