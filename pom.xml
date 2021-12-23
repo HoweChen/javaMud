@@ -19,7 +19,7 @@
 
     <repositories>
         <repository>
-            <id>central</id>
+            <id>aliyun</id>
             <layout>default</layout>
             <name>aliyun maven</name>
             <releases>
@@ -49,6 +49,8 @@
         <jmh.version>1.32</jmh.version>
         <log4j2.version>2.14.1</log4j2.version>
         <dagger2.version>2.38</dagger2.version>
+        <jackson.version>2.13.1</jackson.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -80,6 +82,12 @@
                 <artifactId>jmh-core</artifactId>
                 <version>${jmh.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.openjdk.jmh</groupId>
+                <artifactId>jmh-generator-annprocess</artifactId>
+                <version>${jmh.version}</version>
+                <scope>provided</scope>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -87,10 +95,15 @@
                 <version>${log4j2.version}</version>
                 <scope>runtime</scope>
             </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>com.google.dagger</groupId>-->
+            <!--                <artifactId>dagger</artifactId>-->
+            <!--                <version>${dagger2.version}</version>-->
+            <!--            </dependency>-->
             <dependency>
-                <groupId>com.google.dagger</groupId>
-                <artifactId>dagger</artifactId>
-                <version>${dagger2.version}</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -101,13 +114,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>com.google.dagger</groupId>
                             <artifactId>dagger-compiler</artifactId>
-                            <version>2.x</version>
+                            <version>${dagger2.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.openjdk.jmh</groupId>
+                            <artifactId>jmh-generator-annprocess</artifactId>
+                            <version>${jmh.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
