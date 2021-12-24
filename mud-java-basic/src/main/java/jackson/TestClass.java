@@ -1,16 +1,20 @@
 package jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-/** @author yuhaochen */
+/**
+ * @author yuhaochen
+ */
 public class TestClass {
 
   private String name;
   private int age;
 
-  public TestClass() {}
+  public TestClass() {
+  }
 
   public TestClass(String name, int age) {
     this.name = name;
@@ -19,15 +23,17 @@ public class TestClass {
 
   @Override
   public String toString() {
-    return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-        .append("name", name)
-        .append("age", age)
-        .toString();
+    return new ToStringBuilder(this, ToStringStyle.JSON_STYLE).append("name", name)
+        .append("age", age).toString();
+  }
+
+  public String toReflectionStr() {
+    return ReflectionToStringBuilder.toString(this);
   }
 
   public String toJacksonStr() {
     try {
-      return BenchMark.JACKSON_MAPPER.writeValueAsString(this);
+      return BenchmarkTask.JACKSON_MAPPER.writeValueAsString(this);
     } catch (JsonProcessingException e) {
       return this.toString();
     }
