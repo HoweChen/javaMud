@@ -19,8 +19,8 @@
 
   <repositories>
     <repository>
-      <id>spring</id>
-      <url>https://maven.aliyun.com/repository/spring</url>
+      <id>central</id>
+      <url>https://maven.aliyun.com/repository/central</url>
       <releases>
         <enabled>true</enabled>
       </releases>
