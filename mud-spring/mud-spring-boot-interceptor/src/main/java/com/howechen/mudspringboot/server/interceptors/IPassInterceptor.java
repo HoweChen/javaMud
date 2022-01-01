@@ -17,7 +17,11 @@ public class IPassInterceptor implements HandlerInterceptor {
 
   public static final Logger log = LoggerFactory.getLogger(IPassInterceptor.class);
 
-  @Autowired private IDeferredResultInterceptor deferredResultInterceptor;
+  private final IDeferredResultInterceptor deferredResultInterceptor;
+
+  public IPassInterceptor(IDeferredResultInterceptor deferredResultInterceptor) {
+    this.deferredResultInterceptor = deferredResultInterceptor;
+  }
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
