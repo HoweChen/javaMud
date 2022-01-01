@@ -1,6 +1,7 @@
 package com.howechen.mudspringboot.server.configuration;
 
 import com.howechen.mudspringboot.server.interceptors.I401Interceptor;
+import com.howechen.mudspringboot.server.interceptors.IDeferredResultInterceptor;
 import com.howechen.mudspringboot.server.interceptors.IPassInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +28,7 @@ public class IConfiguration implements WebMvcConfigurer {
     registry
         .addInterceptor(getInterceptor())
         .addPathPatterns("/**")
-        .excludePathPatterns("/**/haha/pass")
+        .excludePathPatterns("/**/haha/pass/**")
         .excludePathPatterns("/**/error");
   }
 }
