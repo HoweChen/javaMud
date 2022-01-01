@@ -1,0 +1,19 @@
+
+###
+GET http://localhost:8080/interceptor/haha/pass/deferred
+
+<> 2021-12-31T211638.200.txt
+<> 2021-12-31T211344.200.txt
+
+###
+GET http://localhost:8080/interceptor/haha/pass/deferred/timeout
+
+<> 2021-12-31T212038.200.txt
+<> 2021-12-31T211803.200.txt
+<> 2021-12-31T211659.200.txt
+
+###
+GET http://localhost:8080/interceptor/haha/pass
+
+<> 2021-12-31T212114.200.txt
+<> 2021-12-31T211605.200.txt

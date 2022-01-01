@@ -3,6 +3,7 @@ package com.howechen.mudspringboot.server.configuration;
 import com.howechen.mudspringboot.server.interceptors.I401Interceptor;
 import com.howechen.mudspringboot.server.interceptors.IDeferredResultInterceptor;
 import com.howechen.mudspringboot.server.interceptors.IPassInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -12,21 +13,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class IConfiguration implements WebMvcConfigurer {
 
-  @Bean
-  public I401Interceptor getInterceptor() {
-    return new I401Interceptor();
-  }
-
-  @Bean
-  public IPassInterceptor getPassInterceptor() {
-    return new IPassInterceptor();
-  }
+  @Autowired private I401Interceptor i401Interceptor;
+  @Autowired private IPassInterceptor passInterceptor;
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(getPassInterceptor()).addPathPatterns("/**");
+    registry.addInterceptor(passInterceptor).addPathPatterns("/**");
     registry
-        .addInterceptor(getInterceptor())
+        .addInterceptor(i401Interceptor)
         .addPathPatterns("/**")
         .excludePathPatterns("/**/haha/pass/**")
         .excludePathPatterns("/**/error");

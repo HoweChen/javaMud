@@ -2,6 +2,7 @@ package com.howechen.mudspringboot.server.interceptors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.async.WebAsyncManager;
 import org.springframework.web.context.request.async.WebAsyncUtils;
@@ -16,13 +17,16 @@ public class IPassInterceptor implements HandlerInterceptor {
 
   public static final Logger log = LoggerFactory.getLogger(IPassInterceptor.class);
 
+  @Autowired private IDeferredResultInterceptor deferredResultInterceptor;
+
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
     log.info("Request URI: {}", request.getRequestURI());
 
     WebAsyncManager asyncManager = WebAsyncUtils.getAsyncManager(request);
-    asyncManager.registerDeferredResultInterceptor(new Object(), new IDeferredResultInterceptor());
+    asyncManager.registerDeferredResultInterceptor(
+        deferredResultInterceptor.getClass().getSimpleName(), deferredResultInterceptor);
     return true;
   }
 }
