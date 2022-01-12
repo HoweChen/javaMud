@@ -7,6 +7,9 @@ import com.howechen.mudspringboot.sentinel.pojo.RuleDO;
 import com.howechen.mudspringboot.sentinel.repository.RuleDAO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 public class DatabaseRefreshDataSource<T> extends AutoRefreshDataSource<List<RuleDO>, T> {
 
   private RuleDAO dataSource;
+
+  AtomicInteger ruleSetHashCode = new AtomicInteger(0);
+  AtomicBoolean modified = new AtomicBoolean(true);
 
   public static Converter<List<RuleDO>, List<FlowRule>> FLOW_RULE_PARSER =
       source ->
@@ -39,7 +45,7 @@ public class DatabaseRefreshDataSource<T> extends AutoRefreshDataSource<List<Rul
 
   @Override
   protected boolean isModified() {
-    return super.isModified();
+    return this.modified.get();
   }
 
   @Override
@@ -49,7 +55,12 @@ public class DatabaseRefreshDataSource<T> extends AutoRefreshDataSource<List<Rul
       return new ArrayList<>();
     } else {
       List<RuleDO> foundRules = dataSource.findAll();
-      log.info("Got new rules: {}", foundRules);
+      int objectHashCode = Objects.hashCode(foundRules);
+      if (ruleSetHashCode.get() != objectHashCode) {
+        log.info("Got new rules: {}", foundRules);
+        ruleSetHashCode.set(objectHashCode);
+        modified.set(true);
+      }
       return foundRules;
     }
   }
