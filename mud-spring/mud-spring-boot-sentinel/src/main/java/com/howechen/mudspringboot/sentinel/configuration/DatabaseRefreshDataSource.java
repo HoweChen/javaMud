@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DatabaseRefreshDataSource<T> extends AutoRefreshDataSource<List<RuleDO>, T> {
 
-  private RuleDAO dataSource;
+  private final RuleDAO dataSource;
 
   AtomicInteger ruleSetHashCode = new AtomicInteger(0);
   AtomicBoolean modified = new AtomicBoolean(true);
