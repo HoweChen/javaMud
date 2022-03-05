@@ -3,6 +3,9 @@ package com.howechen.mudspringboot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author yuhaochen
+ */
 @SpringBootApplication
 public class MudSpringbootApplication {
 

@@ -7,6 +7,9 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.function.Consumer;
 
+/**
+ * @author yuhaochen
+ */
 public class CustomizedDeferredResult<T> extends DeferredResult<T> {
 
   private static final Logger log = LoggerFactory.getLogger(CustomizedDeferredResult.class);
