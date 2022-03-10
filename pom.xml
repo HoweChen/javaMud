@@ -16,6 +16,7 @@
     <module>mud-kotlin</module>
     <module>mud-spring</module>
     <module>mud-mutiny</module>
+    <module>mud-retrofit</module>
   </modules>
 
   <repositories>
