@@ -3,13 +3,13 @@ POST http://localhost:8080/rule/add
 Content-Type: application/json
 
 {
-  "resource": "GET:/block",
+  "resource": "GET:/hello",
   "controlBehavior": 0,
   "count": 0,
   "grade": 1,
-  "limitApp": "default",
+  "appId": "yuhao",
   "strategy": 0
 }
 
 ###
-GET http://localhost:8080/block
+GET http://localhost:8080/hello

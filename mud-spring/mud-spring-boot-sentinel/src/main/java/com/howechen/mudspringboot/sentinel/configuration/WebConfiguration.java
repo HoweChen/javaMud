@@ -1,6 +1,7 @@
 package com.howechen.mudspringboot.sentinel.configuration;
 
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.config.SentinelWebMvcConfig;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -30,7 +31,11 @@ public class WebConfiguration implements WebMvcConfigurer {
     // which is useful to support "chain" relation flow strategy.
     // We can change it and view different result in `Resource Chain` menu of dashboard.
     config.setWebContextUnify(true);
-    config.setOriginParser(request -> request.getHeader("S-user"));
+    config.setOriginParser(
+        request ->
+//            request.getMethod().toUpperCase() + ":" + request.getRequestURI()
+            request.getHeader("appId")
+    );
 
     // Add sentinel interceptor
     registry

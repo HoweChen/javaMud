@@ -1,10 +1,14 @@
 package com.howechen.mudspringboot.sentinel.controller;
 
 import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.EntryType;
 import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.howechen.mudspringboot.sentinel.pojo.RuleDO;
 import com.howechen.mudspringboot.sentinel.repository.RuleDAO;
+import com.howechen.mudspringboot.sentinel.service.ServiceA;
+import com.howechen.mudspringboot.sentinel.service.ServiceB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -24,6 +28,9 @@ public class DefaultController {
 
   final RuleDAO ruleDAO;
 
+  @Autowired ServiceA serviceA;
+  @Autowired ServiceB serviceB;
+
   public DefaultController(RuleDAO ruleDAO) {
     this.ruleDAO = ruleDAO;
   }
@@ -34,8 +41,28 @@ public class DefaultController {
     return "Pass";
   }
 
+  @PostMapping("test")
+  public String postTest(
+      @RequestBody String method,
+      HttpServletRequest servletRequest,
+      HttpServletResponse servletResponse) {
+    log.info("Get request: {}", servletRequest.getRequestURI());
+    if ("A".equals(method)) {
+      serviceA.run();
+    } else {
+      serviceB.run();
+    }
+    return "Pass";
+  }
+
   @PostMapping("rule/add")
-  public void addRule(@RequestBody RuleDO ruleDO) {
-    ruleDAO.save(ruleDO);
+  public void addRule(@RequestBody RuleDO ruleDO, HttpServletRequest request) {
+    String resourceName = request.getMethod().toUpperCase() + ":" + request.getRequestURI();
+    //    ContextUtil.enter(resourceName);
+    try (Entry entry = SphU.entry(resourceName)) {
+      ruleDAO.save(ruleDO);
+    } catch (BlockException e) {
+      log.warn("Got rejected by traffic control");
+    }
   }
 }

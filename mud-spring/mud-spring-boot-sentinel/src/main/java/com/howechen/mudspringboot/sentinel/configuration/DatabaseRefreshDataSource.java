@@ -13,7 +13,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 
-/** @author yuhaochen */
+/**
+ * @author yuhaochen
+ */
 @Slf4j
 public class DatabaseRefreshDataSource<T>
     extends AbstractDefaultRefreshDataSource<List<RuleDO>, T> {
@@ -37,6 +39,7 @@ public class DatabaseRefreshDataSource<T>
                   fr.setControlBehavior(ruleDO.getControlBehavior());
                   fr.setResource(ruleDO.getResource());
                   fr.setStrategy(ruleDO.getStrategy());
+                  fr.setLimitApp(ruleDO.getAppId());
                   return fr;
                 })
             .collect(Collectors.toList());

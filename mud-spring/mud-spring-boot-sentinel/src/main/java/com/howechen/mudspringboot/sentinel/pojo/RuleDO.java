@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import lombok.Data;
 import org.springframework.data.jpa.mapping.JpaPersistentEntity;
 
-/** @author yuhaochen */
+/**
+ * @author yuhaochen
+ */
 @Data
 @Entity
 public class RuleDO {
@@ -32,4 +34,7 @@ public class RuleDO {
 
   @Column(name = "strategy", nullable = false)
   private Integer strategy;
+
+  @Column(name = "app_id", nullable = true)
+  private String appId;
 }
