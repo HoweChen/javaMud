@@ -17,6 +17,7 @@
     <module>mud-spring</module>
     <module>mud-mutiny</module>
     <module>mud-retrofit</module>
+    <module>mud-quarkus</module>
   </modules>
 
   <repositories>
