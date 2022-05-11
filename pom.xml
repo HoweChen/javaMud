@@ -15,9 +15,9 @@
     <module>mud-quartz</module>
     <module>mud-kotlin</module>
     <module>mud-spring</module>
-    <module>mud-mutiny</module>
     <module>mud-retrofit</module>
     <module>mud-quarkus</module>
+    <module>mud-netty</module>
   </modules>
 
   <repositories>

@@ -12,6 +12,10 @@
   <groupId>com.howechen.javamud.basic</groupId>
   <artifactId>mud-java-basic</artifactId>
   <packaging>pom</packaging>
+  <modules>
+    <module>mud-java8</module>
+    <module>mud-reactive</module>
+  </modules>
   <dependencies>
     <dependency>
       <groupId>org.openjdk.jmh</groupId>
