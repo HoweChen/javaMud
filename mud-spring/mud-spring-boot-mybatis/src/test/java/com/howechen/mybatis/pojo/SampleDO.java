@@ -1,4 +1,4 @@
-package com.howechen.mudspringboot.pojo;
+package com.howechen.mybatis.pojo;
 
 public class SampleDO {
   public String username;
