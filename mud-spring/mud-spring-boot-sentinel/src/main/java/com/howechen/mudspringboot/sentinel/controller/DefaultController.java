@@ -9,6 +9,7 @@ import com.howechen.mudspringboot.sentinel.pojo.RuleDO;
 import com.howechen.mudspringboot.sentinel.repository.RuleDAO;
 import com.howechen.mudspringboot.sentinel.service.ServiceA;
 import com.howechen.mudspringboot.sentinel.service.ServiceB;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -43,10 +44,12 @@ public class DefaultController {
 
   @PostMapping("test")
   public String postTest(
-      @RequestBody String method,
+      @RequestBody Map<String, Object> requestBody,
       HttpServletRequest servletRequest,
       HttpServletResponse servletResponse) {
-    log.info("Get request: {}", servletRequest.getRequestURI());
+//    log.info("Get request: {}", servletRequest.getRequestURI());
+    String method = (String) requestBody.get("method");
+    log.info("Method: {}", method);
     if ("A".equals(method)) {
       serviceA.run();
     } else {

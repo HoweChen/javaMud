@@ -18,7 +18,7 @@ public class ISentinelBlockExceptionHandler extends DefaultBlockExceptionHandler
   @Override
   public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e)
       throws Exception {
-    log.warn("Request got blocked, request appId:{}", request.getHeader("appId"));
+    log.warn("Request got blocked, block rule resource name: {}", e.getRule().getResource());
     // Return 429 (Too Many Requests) by default.
     response.setStatus(429);
 

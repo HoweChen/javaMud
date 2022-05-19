@@ -1,7 +1,7 @@
 package com.howechen.mudspringboot.sentinel.configuration;
 
+import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.config.SentinelWebMvcConfig;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -11,6 +11,28 @@ public class WebConfiguration implements WebMvcConfigurer {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
+
+    // Add sentinel interceptor
+    registry
+        .addInterceptor(
+            new ISentinelEndpointInterceptor(
+                newSentinelConfig(
+//                    request -> request.getMethod().toUpperCase() + ":" + request.getRequestURI()
+                    request -> request.getHeader("appId")
+                )
+            ))
+        .addPathPatterns("/**")
+        .excludePathPatterns("/rule/add");
+
+    registry
+        .addInterceptor(
+            new ISentinelAppIdInterceptor(newSentinelConfig(request -> request.getHeader("appId"))))
+        .addPathPatterns("/**")
+        .excludePathPatterns("/rule/add");
+    System.out.println("haah");
+  }
+
+  private SentinelWebMvcConfig newSentinelConfig(RequestOriginParser parser) {
     SentinelWebMvcConfig config = new SentinelWebMvcConfig();
 
     // Depending on your situation, you can choose to process the BlockException via
@@ -31,16 +53,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     // which is useful to support "chain" relation flow strategy.
     // We can change it and view different result in `Resource Chain` menu of dashboard.
     config.setWebContextUnify(true);
-    config.setOriginParser(
-        request ->
-//            request.getMethod().toUpperCase() + ":" + request.getRequestURI()
-            request.getHeader("appId")
-    );
-
-    // Add sentinel interceptor
-    registry
-        .addInterceptor(new ISentinelWebInterceptor(config))
-        .addPathPatterns("/**")
-        .excludePathPatterns("/rule/add");
+    config.setOriginParser(parser);
+    return config;
   }
 }
