@@ -1,4 +1,4 @@
-package com.howechen.javaMud
+package com.howechen.javaMud.kotlin
 
 fun main(args: Array<String>) {
     println("Hello, World")
