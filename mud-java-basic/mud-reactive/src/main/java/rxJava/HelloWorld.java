@@ -1,4 +1,4 @@
-package com.howechen.javamud.basic.rxJava;
+package rxJava;
 
 import io.reactivex.rxjava3.core.Flowable;
 
