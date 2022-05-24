@@ -19,7 +19,6 @@ import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.EntryType;
 import com.alibaba.csp.sentinel.ResourceTypeConstants;
 import com.alibaba.csp.sentinel.SphU;
-import com.alibaba.csp.sentinel.adapter.spring.webmvc.AbstractSentinelInterceptor;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.config.SentinelWebMvcConfig;
 import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
@@ -32,24 +31,12 @@ import org.slf4j.LoggerFactory;
 /**
  * @author yuhaochen
  */
-public class ISentinelAppIdInterceptor extends AbstractSentinelInterceptor {
+public class ISentinelAppIdInterceptor extends AbstractDefaultSentinelInterceptor {
 
   private static final Logger log = LoggerFactory.getLogger(ISentinelAppIdInterceptor.class);
 
-  private final SentinelWebMvcConfig config;
-
-  public ISentinelAppIdInterceptor() {
-    this(new SentinelWebMvcConfig());
-  }
-
   public ISentinelAppIdInterceptor(SentinelWebMvcConfig config) {
     super(config);
-    if (config == null) {
-      // Use the default config by default.
-      this.config = new SentinelWebMvcConfig();
-    } else {
-      this.config = config;
-    }
   }
 
   @Override
@@ -60,29 +47,12 @@ public class ISentinelAppIdInterceptor extends AbstractSentinelInterceptor {
   }
 
   @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-      throws Exception {
-    try {
-      String resourceName = getResourceName(request);
+  protected String getContextName(HttpServletRequest request) {
+    return "APP_ID_CONTEXT";
+  }
 
-      if (StringUtil.isEmpty(resourceName)) {
-        return true;
-      }
-
-//      // Parse the request origin using registered origin parser.
-//      String origin = parseOrigin(request);
-//      String contextName = getContextName(request);
-//      ContextUtil.enter(contextName, origin);
-      Entry entry = SphU.entry(resourceName, ResourceTypeConstants.COMMON_WEB, EntryType.IN);
-      request.setAttribute(this.config.getRequestAttributeName(), entry);
-      return true;
-    } catch (BlockException e) {
-      try {
-        handleBlockException(request, response, e);
-      } finally {
-        ContextUtil.exit();
-      }
-      return false;
-    }
+  @Override
+  protected boolean isEnterLevel() {
+    return false;
   }
 }

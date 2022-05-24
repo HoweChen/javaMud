@@ -51,9 +51,9 @@ public class DefaultController {
     String method = (String) requestBody.get("method");
     log.info("Method: {}", method);
     if ("A".equals(method)) {
-      serviceA.run();
+      serviceA.run(servletRequest);
     } else {
-      serviceB.run();
+      serviceB.run(servletRequest);
     }
     return "Pass";
   }

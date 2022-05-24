@@ -16,23 +16,19 @@ public class WebConfiguration implements WebMvcConfigurer {
     registry
         .addInterceptor(
             new ISentinelEndpointInterceptor(
-                newSentinelConfig(
-//                    request -> request.getMethod().toUpperCase() + ":" + request.getRequestURI()
-                    request -> request.getHeader("appId")
-                )
-            ))
+                newSentinelConfig("endpoint", request -> request.getHeader("appId"))))
         .addPathPatterns("/**")
         .excludePathPatterns("/rule/add");
 
     registry
         .addInterceptor(
-            new ISentinelAppIdInterceptor(newSentinelConfig(request -> request.getHeader("appId"))))
+            new ISentinelAppIdInterceptor(
+                newSentinelConfig("appId", request -> request.getHeader("appId"))))
         .addPathPatterns("/**")
         .excludePathPatterns("/rule/add");
-    System.out.println("haah");
   }
 
-  private SentinelWebMvcConfig newSentinelConfig(RequestOriginParser parser) {
+  private SentinelWebMvcConfig newSentinelConfig(String attributeName, RequestOriginParser parser) {
     SentinelWebMvcConfig config = new SentinelWebMvcConfig();
 
     // Depending on your situation, you can choose to process the BlockException via
@@ -43,7 +39,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     // Use the customized handler.
     config.setBlockExceptionHandler(new ISentinelBlockExceptionHandler());
-
+    config.setRequestAttributeName(attributeName);
     // Custom configuration if necessary
     config.setHttpMethodSpecify(true);
     // By default web context is true, means that unify web context(i.e. use the default context
@@ -53,7 +49,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     // which is useful to support "chain" relation flow strategy.
     // We can change it and view different result in `Resource Chain` menu of dashboard.
     config.setWebContextUnify(true);
-    config.setOriginParser(parser);
+    //    config.setOriginParser(parser);
     return config;
   }
 }

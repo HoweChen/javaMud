@@ -31,11 +31,12 @@ public class SentinelConfiguration {
     DatabaseRefreshDataSource<List<FlowRule>> databaseRefreshDataSource =
         getDatabaseRefreshDataSource();
     if (databaseRefreshDataSource != null) {
+
       FlowRuleManager.register2Property(databaseRefreshDataSource.getProperty());
     }
   }
 
-  @Bean
+//  @Bean
   DatabaseRefreshDataSource<List<FlowRule>> getDatabaseRefreshDataSource() {
     if (autoRefresh) {
       log.info("Refreshable data source would be initiated");

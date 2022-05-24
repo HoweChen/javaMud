@@ -15,35 +15,28 @@
  */
 package com.howechen.mudspringboot.sentinel.configuration;
 
-import com.alibaba.csp.sentinel.adapter.spring.webmvc.AbstractSentinelInterceptor;
-import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.UrlCleaner;
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.EntryType;
+import com.alibaba.csp.sentinel.ResourceTypeConstants;
+import com.alibaba.csp.sentinel.SphU;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.config.SentinelWebMvcConfig;
+import com.alibaba.csp.sentinel.context.ContextUtil;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.util.StringUtil;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.HandlerMapping;
 
 /**
  * @author yuhaochen
  */
-public class ISentinelEndpointInterceptor extends AbstractSentinelInterceptor {
+public class ISentinelEndpointInterceptor extends AbstractDefaultSentinelInterceptor {
 
   private static final Logger log = LoggerFactory.getLogger(ISentinelEndpointInterceptor.class);
 
-  private final SentinelWebMvcConfig config;
-
-  public ISentinelEndpointInterceptor() {
-    this(new SentinelWebMvcConfig());
-  }
-
   public ISentinelEndpointInterceptor(SentinelWebMvcConfig config) {
     super(config);
-    if (config == null) {
-      // Use the default config by default.
-      this.config = new SentinelWebMvcConfig();
-    } else {
-      this.config = config;
-    }
   }
 
   @Override
@@ -51,5 +44,15 @@ public class ISentinelEndpointInterceptor extends AbstractSentinelInterceptor {
     String resourceName = request.getMethod().toUpperCase() + ":" + request.getRequestURI();
     log.info("Get resource: {}", resourceName);
     return resourceName;
+  }
+
+  @Override
+  protected String getContextName(HttpServletRequest request) {
+    return "END_POINT_CONTEXT";
+  }
+
+  @Override
+  protected boolean isEnterLevel() {
+    return true;
   }
 }
