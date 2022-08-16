@@ -1,4 +1,4 @@
-package com.howechen.javaMud;
+package com.howechen.javaMud.netty.echo;
 
 public class Main {
   public static void main(String[] args) {
