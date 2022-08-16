@@ -1,5 +1,6 @@
 package com.howechen.mudspringboot.sentinel.configuration;
 
+import com.alibaba.csp.sentinel.adapter.spring.webmvc.SentinelWebInterceptor;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.RequestOriginParser;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.config.SentinelWebMvcConfig;
 import org.springframework.context.annotation.Configuration;
@@ -13,19 +14,21 @@ public class WebConfiguration implements WebMvcConfigurer {
   public void addInterceptors(InterceptorRegistry registry) {
 
     // Add sentinel interceptor
-    registry
-        .addInterceptor(
-            new ISentinelEndpointInterceptor(
-                newSentinelConfig("endpoint", request -> request.getHeader("appId"))))
-        .addPathPatterns("/**")
-        .excludePathPatterns("/rule/add");
+    //    registry
+    //        .addInterceptor(
+    //            new ISentinelEndpointInterceptor(
+    //                newSentinelConfig("endpoint", request -> request.getHeader("appId"))))
+    //        .addPathPatterns("/**")
+    //        .excludePathPatterns("/rule/add");
 
-    registry
-        .addInterceptor(
-            new ISentinelAppIdInterceptor(
-                newSentinelConfig("appId", request -> request.getHeader("appId"))))
-        .addPathPatterns("/**")
-        .excludePathPatterns("/rule/add");
+    //    registry
+    //        .addInterceptor(
+    //            new ISentinelAppIdInterceptor(
+    //                newSentinelConfig("appId", request -> request.getHeader("appId"))))
+    //        .addPathPatterns("/**")
+    //        .excludePathPatterns("/rule/add");
+
+    registry.addInterceptor(new SentinelWebInterceptor(new SentinelWebMvcConfig()));
   }
 
   private SentinelWebMvcConfig newSentinelConfig(String attributeName, RequestOriginParser parser) {

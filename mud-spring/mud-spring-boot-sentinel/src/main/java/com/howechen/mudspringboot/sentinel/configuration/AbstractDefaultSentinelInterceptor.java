@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class AbstractDefaultSentinelInterceptor extends AbstractSentinelInterceptor {
 
   BaseWebMvcConfig config;
-  Context curContext;
 
   public AbstractDefaultSentinelInterceptor(BaseWebMvcConfig config) {
     super(config);
@@ -64,7 +63,7 @@ public abstract class AbstractDefaultSentinelInterceptor extends AbstractSentine
       if (isEnterLevel()) {
         String origin = parseOrigin(request);
         String contextName = getContextName(request);
-        curContext = ContextUtil.enter(contextName, origin);
+        ContextUtil.enter(contextName, origin);
       }
       entry = SphU.entry(resourceName, ResourceTypeConstants.COMMON_WEB, EntryType.IN);
       request.setAttribute(config.getRequestAttributeName(), entry);

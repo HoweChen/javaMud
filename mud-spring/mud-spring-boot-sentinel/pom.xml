@@ -11,7 +11,7 @@
   </parent>
   <artifactId>mud-spring-boot-sentinel</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>mud-spring-boot</name>
+  <name>mud-spring-boot-sentinel</name>
   <description>Demo project for Spring Boot Sentinel</description>
 
   <properties>
