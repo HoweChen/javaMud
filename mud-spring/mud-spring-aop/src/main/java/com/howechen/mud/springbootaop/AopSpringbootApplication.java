@@ -18,7 +18,9 @@ public class AopSpringbootApplication {
     ConfigurableApplicationContext run = SpringApplication.run(AopSpringbootApplication.class,
         args);
 
-    run.getBean(TestService.class).test("yuhaochen", "18");
+    TestService bean = run.getBean(TestService.class);
+    bean.test("yuhaochen", "18");
+    bean.testWithoutAnnotation("stupidsometing", "28");
   }
 
 }
