@@ -1,5 +1,6 @@
 package com.howechen.mud.springbootaop.component;
 
+import com.howechen.mud.springbootaop.MethodAnnotation;
 import com.howechen.mud.springbootaop.ParameterAnnotation;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -16,6 +17,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.aspectj.weaver.patterns.AnnotationPointcut;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -49,8 +51,9 @@ public class LoggingAspect {
 //    log.info("******");
 //  }
 
-  @Around("execution(* com.howechen.mud.springbootaop.service.*.*(..)) && @annotation(com.howechen.mud.springbootaop.MethodAnnotation)")
-  public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
+  @Around("execution(* com.howechen.mud.springbootaop.service.TestService.*(..)) && @annotation(annotation)")
+  public Object logAround(ProceedingJoinPoint joinPoint, MethodAnnotation annotation)
+      throws Throwable {
     log.info("logAround() is running!");
     log.info("hijacked : " + joinPoint.getSignature().getName());
 
@@ -73,6 +76,53 @@ public class LoggingAspect {
     log.info("hijacked : " + joinPoint.getSignature().getName());
     log.info(result.toString());
     log.info("******");
+    return result;
+  }
+
+  @Around("execution(* com.howechen.mud.springbootaop.service.AbstractService.*(..))")
+  public Object logChildService(ProceedingJoinPoint joinPoint) throws Throwable {
+    log.info("logChildService() is running!");
+    log.info("hijacked : " + joinPoint.getSignature().getName());
+    log.info("******");
+    Object result = joinPoint.proceed();
+    log.info("logAround() is running!");
+    log.info("hijacked : " + joinPoint.getSignature().getName());
+    log.info("{}", result);
+    log.info("******");
+    return result;
+  }
+
+  @Around("execution(* com.howechen.mud.springbootaop.service.ExceptionService.*(..))")
+  public Object passExceptionLogging(ProceedingJoinPoint joinPoint) throws Throwable {
+    log.info("passExceptionLogging() is running!");
+    log.info("hijacked : " + joinPoint.getSignature().getName());
+    log.info("******");
+    Object result = joinPoint.proceed();
+    log.info("logAround() is running!");
+    log.info("hijacked : " + joinPoint.getSignature().getName());
+    log.info("{}", result);
+    log.info("******");
+    return result;
+  }
+
+  @Around("execution(* com.howechen.mud.springbootaop.service.ParameterService.*(com.howechen.mud.springbootaop.pojo.TestPojo,..))")
+  public Object printParamter(ProceedingJoinPoint joinPoint) throws Throwable {
+    log.info("passExceptionLogging() is running!");
+    log.info("hijacked : " + joinPoint.getSignature().getName());
+    log.info("parameter: {}", joinPoint.getArgs()[0]);
+    log.info("******");
+    Object result = joinPoint.proceed();
+    log.info("logAround() is running!");
+    log.info("hijacked : " + joinPoint.getSignature().getName());
+    log.info("{}", result);
+    log.info("******");
+    return result;
+  }
+
+  @Around("execution(* com.howechen.mud.springbootaop.service.ThreadingService.*(..))")
+  public Object printThreadName(ProceedingJoinPoint joinPoint) throws Throwable {
+    Object result = joinPoint.proceed();
+    log.info("Thread id: {} result: {}", Thread.currentThread().getId(), result);
     return result;
   }
 
