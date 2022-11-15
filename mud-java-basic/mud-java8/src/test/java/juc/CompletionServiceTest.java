@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class CompletionServiceTest {
 

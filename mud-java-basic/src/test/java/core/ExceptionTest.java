@@ -3,25 +3,19 @@ package core;
 import java.util.concurrent.ThreadLocalRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
-import pojo.BizError;
-import pojo.BizWrapper;
+import pojo.IResult;
 import pojo.YABizError;
 
 public class ExceptionTest {
 
   @Test
   public void givenFunctionWithBizWrapperAsReturnValue_whenReturnBizWrapper_thenShouldSucceed() {
-    BizWrapper<String> bw = getString();
-    if (bw.hasError()) {
-      System.out.println(bw.getError());
-    } else {
-      System.out.println(bw.getResponse());
-    }
+    IResult bw = getString();
+    System.out.println(bw);
   }
 
   @Test
-  public void
-      givenFunctionWithYABizWrapperAsInputParameter_whenReturnBizWrapper_thenShouldSucceed() {
+  public void givenFunctionWithYABizWrapperAsInputParameter_whenReturnBizWrapper_thenShouldSucceed() {
     YABizError bizError = new YABizError();
     String result = getString(bizError);
     if (StringUtils.isEmpty(result) || bizError.hasError()) {
@@ -31,19 +25,18 @@ public class ExceptionTest {
     }
   }
 
-  private BizWrapper<String> getString() {
-    BizWrapper<Integer> intBW = getRandomInteger();
-    if (intBW.hasError()) {
-      return BizWrapper.ERROR(intBW.getError());
-    } else {
-      return BizWrapper.SUCCESS(String.valueOf(intBW.getResponse()));
-    }
+  private IResult getString() {
+    IResult randomIntegerResult = getRandomInteger();
+    return switch (randomIntegerResult.getResultType()) {
+      case OK -> IResult.OK(randomIntegerResult, String::valueOf);
+      case ERROR -> IResult.ERROR(randomIntegerResult.getError());
+    };
   }
 
-  private BizWrapper<Integer> getRandomInteger() {
+  private IResult getRandomInteger() {
     int response = ThreadLocalRandom.current().nextInt();
     System.out.println(response);
-    return BizWrapper.SUCCESS(response);
+    return IResult.OK(response);
   }
 
   private String getString(YABizError error) {

@@ -10,7 +10,7 @@
     <AsyncLogger name="benchmark" level="debug" additivity="false">
       <AppenderRef ref="LogToConsole"/>
     </AsyncLogger>
-    <Root level="error">
+    <Root level="IError">
       <AppenderRef ref="LogToConsole"/>
     </Root>
   </Loggers>

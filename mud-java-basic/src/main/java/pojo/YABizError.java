@@ -9,25 +9,25 @@ import javax.annotation.Nonnull;
  */
 public class YABizError {
 
-  private List<BizError> errors = new ArrayList<>();
+  private List<IError> IErrors = new ArrayList<>();
 
-  public List<BizError> getAllErrors() {
-    return errors;
+  public List<IError> getAllErrors() {
+    return IErrors;
   }
 
-  public void addError(@Nonnull BizError error) {
-    this.errors.add(error);
+  public void addError(@Nonnull IError IError) {
+    this.IErrors.add(IError);
   }
 
   public boolean hasError() {
-    return !this.errors.isEmpty();
+    return !this.IErrors.isEmpty();
   }
 
-  public BizError getError() {
-    if (errors.isEmpty()) {
-      return new BizError();
+  public IError getError() {
+    if (IErrors.isEmpty()) {
+      return new IError();
     } else {
-      return this.errors.get(this.errors.size() - 1);
+      return this.IErrors.get(this.IErrors.size() - 1);
     }
   }
 }

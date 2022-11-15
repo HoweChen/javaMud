@@ -3,7 +3,7 @@ package pojo;
 /**
  * @author yuhaochen
  */
-public class BizError {
+public class IError {
 
   String code;
   String message;
