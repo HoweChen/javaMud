@@ -14,7 +14,7 @@
   </parent>
   <artifactId>mud-spring-boot-mybatis</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>mud-spring-boot</name>
+  <name>mud-spring-boot-mybatis</name>
   <description>Demo project for Spring Boot</description>
 
   <dependencies>
@@ -51,20 +51,15 @@
     </dependency>
 
     <dependency>
-      <groupId>com.github.ben-manes.caffeine</groupId>
-      <artifactId>caffeine</artifactId>
-      <version>3.0.5</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.mybatis.spring.boot</groupId>
       <artifactId>mybatis-spring-boot-starter</artifactId>
       <version>${mybatis-spring-boot-starter.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>3.5.1</version>
     </dependency>
   </dependencies>
 

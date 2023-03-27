@@ -15,7 +15,7 @@
   <properties>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <spring.boot.versoin>2.6.1</spring.boot.versoin>
+    <spring.boot.versoin>2.7.3</spring.boot.versoin>
     <java.version>17</java.version>
   </properties>
 
@@ -26,6 +26,7 @@
     <module>mud-spring-boot-sentinel</module>
     <module>mud-spring-data-jpa</module>
     <module>mud-spring-boot-kotlin-hybrid</module>
+    <module>mud-spring-basic</module>
   </modules>
 
   <dependencyManagement>

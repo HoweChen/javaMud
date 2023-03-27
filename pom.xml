@@ -11,12 +11,11 @@
     <modules>
         <module>mud-java-basic</module>
         <module>mud-shiro</module>
-        <module>mud-camel</module>
         <module>mud-quartz</module>
-        <module>mud-kotlin</module>
         <module>mud-spring</module>
         <module>mud-retrofit</module>
         <module>mud-netty</module>
+        <module>mud-spring/mud-spring-boot-downgrade</module>
     </modules>
 
     <repositories>
