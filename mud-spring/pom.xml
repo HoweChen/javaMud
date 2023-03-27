@@ -25,7 +25,6 @@
     <module>mud-spring-boot-interceptor</module>
     <module>mud-spring-boot-sentinel</module>
     <module>mud-spring-data-jpa</module>
-    <module>mud-spring-boot-kotlin-hybrid</module>
     <module>mud-spring-basic</module>
   </modules>
 
